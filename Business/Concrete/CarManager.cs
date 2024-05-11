@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -34,12 +35,12 @@ namespace Business.Concrete
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Update(car);
         }
 
         public void Delete(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Delete(car);
         }
 
         public List<Car> GetAll()
@@ -57,6 +58,9 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.BrandId == colorId);
         }
 
-        
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
     }
 }
