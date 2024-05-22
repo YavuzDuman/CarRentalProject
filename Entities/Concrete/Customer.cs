@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Color : IEntity
+    public class Customer : IEntity
     {
-        [Key] public int ColorId { get; set; }
-        public string ColorName { get; set; }
+        [Key] public int CustomerId { get; set; }
+        public string CompanyName { get; set; }
+
     }
 }
