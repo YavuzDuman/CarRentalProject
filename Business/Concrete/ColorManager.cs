@@ -27,10 +27,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ColorAdded);
         }
 
-        public IResult Delete(Color color)
+        public IResult Delete(int id)
         {
-            _colorDal.Delete(color);
-            return new ErrorResult(Messages.ColorDeleted);
+            var deletedColor = _colorDal.Get(c => c.ColorId == id);
+            _colorDal.Delete(deletedColor);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
         public IDataResult<List<Color>> GetAll()

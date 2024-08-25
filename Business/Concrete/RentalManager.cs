@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -25,15 +27,18 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Delete(Rental rental)
+        public IResult Delete(int id)
         {
-            throw new NotImplementedException();
+            var deletedRental = _rentalDal.Get(r => r.RentalId == id);
+            _rentalDal.Delete(deletedRental);
+            return new SuccessResult(Messages.RentalDeleted);
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            throw new NotImplementedException();
-        }
+            var result = _rentalDal.GetAll();
+			return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+		}
 
         public IResult Update(Rental rental)
         {

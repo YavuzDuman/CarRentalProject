@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.DataAccess;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -27,10 +28,11 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Delete(Customer customer)
+        public IResult Delete(int id)
         {
-            _customerDal.Delete(customer);
-            return new ErrorResult();
+            var DeletedCustomer = _customerDal.Get(c=> c.CustomerId == id);
+            _customerDal.Delete(DeletedCustomer);
+            return new SuccessResult(Messages.CustomerDeleted);
         }
 
         public IDataResult<List<Customer>> GetAll()

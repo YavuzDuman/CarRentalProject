@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -25,14 +26,19 @@ namespace Business.Concrete
             _brandDal.Add(brand);
             return new SuccessResult(Messages.BrandAdded);
         }
-
-        public IResult Delete(Brand brand)
+		public IResult Delete(int id)
         {
-            _brandDal.Delete(brand);
-            return new SuccessResult(Messages.BrandDeleted);
-        }
+			var deletedCar = _brandDal.Get(c => c.BrandId == id);
+			_brandDal.Delete(deletedCar);
+			return new SuccessResult(Messages.BrandDeleted);
+		}
 
-        public IDataResult<List<Brand>> GetAll()
+		public IResult DeleteById(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),"Brandler listelendi");
         }
