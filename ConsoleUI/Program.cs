@@ -1,4 +1,5 @@
 ﻿
+using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -15,9 +16,11 @@ namespace ConsoleUI
 {
     class Program
     {
-        static void Main(string[] args)
+        private string rentDate = "19.02.2024";
+		static void Main(string[] args)
         {
-            CarTest();
+
+            //CarTest();
             //ColorListMethod();
             //ColorAdd();
             //CarAddList();
@@ -36,7 +39,7 @@ namespace ConsoleUI
 
         private static void List()
         {
-            Business.Concrete.EfCarDal carManager = new Business.Concrete.EfCarDal(new DataAccess.Concrete.EntityFramework.EfCarDal());
+            ICarService carManager = new CarManager(new EfCarDal());
 
             foreach (var car in carManager.GetCarDetails().Data)
             {
@@ -57,7 +60,7 @@ namespace ConsoleUI
 
         private static void CarAddList()
         {
-            Business.Concrete.EfCarDal carmanager = new Business.Concrete.EfCarDal(new DataAccess.Concrete.EntityFramework.EfCarDal());
+            ICarService carmanager = new CarManager(new EfCarDal());
 
             carmanager.Add(new Car {  CarName = "Mustang", BrandId = 2, ColorId = 2, DailyPrice = 12000, ModelYear = "1978", Description = "Amerikan" });
 
@@ -88,10 +91,10 @@ namespace ConsoleUI
 
         private static void CarTest()
         {
-            Business.Concrete.EfCarDal carManager = new Business.Concrete.EfCarDal(new DataAccess.Concrete.EntityFramework.EfCarDal());
+			ICarService carManager = new CarManager(new EfCarDal());
 
 
-           var result = carManager.GetById(2).Data;
+			var result = carManager.GetById(2).Data;
             Console.WriteLine(result.CarName);
         }
     }

@@ -15,6 +15,7 @@ using Business.ValidationRules.FluentValidation;
 using FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Aspects.Autofac.Validation;
+using Core.Business;
 
 namespace Business.Concrete
 {
@@ -31,7 +32,7 @@ namespace Business.Concrete
 		[ValidationAspect(typeof(CarValidator))]
 		public IResult Add(Car car)
 		{
-
+			BusinessRules.Run(CheckIfCarNameExists(car.CarName));
 			_carDal.Add(car);
 			return new SuccessResult(Messages.CarAdded);
 		}
@@ -76,6 +77,16 @@ namespace Business.Concrete
 		{
 			return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
 		}
+
+		private IResult CheckIfCarNameExists(string carName)
+		{
+			var result = _carDal.GetAll(c=>c.CarName == carName).Any();
+			if (result)
+			{
+				return new ErrorResult(Messages.CarNameAlreadyExists);
+			}
+			return new SuccessResult();
+		} 
 	}
 }
 
