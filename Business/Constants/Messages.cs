@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +28,18 @@ namespace Business.Constants
         public static string RentalDeleted = "Rental silindi";
 		public static string RentalUpdated = "Rental Güncellendi";
         public static string CarNameAlreadyExists = "Araba ismi sistemde mevcut";
+		public static string? AuthorizationDenied = "Yetki reddedildi";
+		public static string UserRegistered= "Kullanıcı zaten kayıtlı";
+		public static string UserNotFound = "Kullanıcı bulunamadı";
+		public static string PasswordError = "Şifre Hatalı";
+		public static string SuccessfulLogin = "Giriş işlemi başarılı";
+		public static string UserAlreadyExists = "Kullanıcı mevcut";
+		public static string AccessTokenCreated ="Token Geçersiz";
 
-		public static string ImageAdded { get; internal set; }
-		public static string DefaultError { get; internal set; }
-		public static string ImageDeleted { get; internal set; }
-		public static string ImageUpdated { get; internal set; }
-		public static string ImageLimitExceded { get; internal set; }
+        public static string ImageAdded = "Foto Eklendi";
+        public static string DefaultError = "Default error";
+        public static string ImageDeleted = "Görsel silindi";
+        public static string ImageUpdated = "Görsel güncellend,";
+        public static string ImageLimitExceded = "Görsel limiti aşıldı";
 	}
 }

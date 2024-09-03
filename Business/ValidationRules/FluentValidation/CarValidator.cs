@@ -14,7 +14,6 @@ namespace Business.ValidationRules.FluentValidation
 		{
 			RuleFor(c => c.CarName).NotEmpty();
 			RuleFor(c => c.BrandId).NotEmpty();
-			RuleFor(c => c.ModelYear).MinimumLength(1900);
 		}
 	}
 }
