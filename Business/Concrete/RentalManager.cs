@@ -59,9 +59,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalUpdated);
         }
 
-		public IDataResult<List<RentalDetailsDto>> GetRentalDetail(Rental rental)
+		public IDataResult<List<RentalDetailsDto>> GetRentalDetails()
 		{
-			return new SuccessDataResult<List<RentalDetailsDto>>(_rentalDal.GetRentalDetail());
+			return new SuccessDataResult<List<RentalDetailsDto>>(_rentalDal.GetRentalDetails());
 		}
 	}
 }

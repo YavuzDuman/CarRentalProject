@@ -32,6 +32,8 @@ builder.Services.AddControllers();
 //builder.Services.AddSingleton<IRentalService, RentalManager>();
 //builder.Services.AddSingleton<IRentalDal, EfRentalDal>();
 
+builder.Services.AddCors();
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
@@ -74,6 +76,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
 app.UseHttpsRedirection();
 

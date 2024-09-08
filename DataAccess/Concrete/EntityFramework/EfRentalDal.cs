@@ -25,25 +25,25 @@ namespace DataAccess.Concrete.EntityFramework
 			}
 		}
 
-		public List<RentalDetailsDto> GetRentalDetail()
+		public List<RentalDetailsDto> GetRentalDetails()
 		{
-			using (CarDatabaseContext context = new CarDatabaseContext())
+			using (var context = new CarDatabaseContext())
 			{
 				var result = from rental in context.Rentals
 							 join car in context.Cars
 							 on rental.CarId equals car.CarId
-							 join customer in context.Customers
-							 on rental.CustomerId equals customer.CustomerId
 							 join brand in context.Brands
 							 on car.BrandId equals brand.BrandId
 							 join user in context.Users
-							 on customer.CustomerId equals user.Id
-							 select new RentalDetailsDto
+							 on rental.RentalId equals user.Id
+							 select new RentalDetailsDto()
 							 {
-								 CarBrand = brand.BrandName,
-								 CarDescription = car.Description,
-								 CustomerName = user.FirstName,
-								 RentalId = rental.RentalId
+								 RentalId = rental.RentalId,
+								 CarName = car.CarName,
+								 BrandName = brand.BrandName,
+								 CustomerName = user.FirstName + " " + user.LastName,
+								 RentDate = rental.RentDate,
+								 ReturnDate = rental.ReturnDate,
 							 };
 				return result.ToList();
 			}
